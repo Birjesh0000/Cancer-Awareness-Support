@@ -13,7 +13,7 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <h1>CAS</h1>
+          <h1>Cancer Awareness & Support</h1>
         </div>
         <nav className="nav">
           <button onClick={() => handleScroll('contact')} className="nav-link">

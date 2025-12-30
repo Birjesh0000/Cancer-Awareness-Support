@@ -3,7 +3,7 @@ import Hero from './components/Hero';
 import ContactForm from './components/ContactForm';
 import QuotesSection from './components/QuotesSection';
 import Footer from './components/Footer';
-import './App.css';
+import './index.css';
 
 function App() {
   return (
@@ -11,9 +11,7 @@ function App() {
       <Header />
       <Hero />
       <ContactForm />
-      <section id="quotes">
-        <QuotesSection />
-      </section>
+      <QuotesSection />
       <Footer />
     </div>
   );

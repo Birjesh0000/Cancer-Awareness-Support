@@ -8,7 +8,6 @@ const QuotesSection = () => {
   const [error, setError] = useState(null);
   const [quoteCount, setQuoteCount] = useState(0);
 
-  // Fallback quotes if API fails
   const fallbackQuotes = [
     { text: "The only way out is through.", author: "Robert Frost" },
     { text: "Hope is the thing with feathers that perches in the soul.", author: "Emily Dickinson" },
@@ -26,28 +25,24 @@ const QuotesSection = () => {
     setLoading(true);
     setError(null);
     try {
-      // Try primary API first
       const response = await axios.get('https://api.quotable.io/random', {
         timeout: 5000,
         headers: { 'Accept': 'application/json' }
       });
       
-      // Handle the response properly
       const quoteText = response.data.content || response.data.text || '';
       const authorName = response.data.author || 'Unknown';
       
       if (quoteText) {
         setQuote({
           text: quoteText,
-          author: authorName.split(',')[0] // Remove extra info
+          author: authorName.split(',')[0]
         });
       } else {
         throw new Error('Invalid response format');
       }
       setQuoteCount((prev) => prev + 1);
     } catch (err) {
-      // Use fallback quote
-      console.log('Primary API failed, using fallback quote');
       const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
       setQuote(fallbackQuotes[randomIndex]);
       setQuoteCount((prev) => prev + 1);
@@ -58,7 +53,6 @@ const QuotesSection = () => {
 
   useEffect(() => {
     fetchQuote();
-    // Auto-refresh quote every 30 seconds
     const interval = setInterval(() => {
       fetchQuote();
     }, 30000);
@@ -66,7 +60,7 @@ const QuotesSection = () => {
   }, []);
 
   return (
-    <section className="quotes-section">
+    <section id="quotes" className="quotes-section">
       <div className="quotes-wrapper">
         <div className="quotes-container">
           <div className="quotes-header">
@@ -79,12 +73,6 @@ const QuotesSection = () => {
               <div className="quote-loader">
                 <div className="spinner"></div>
                 <p>Loading inspiring message...</p>
-              </div>
-            )}
-
-            {error && !loading && (
-              <div className="quote-error">
-                <p>⚠️ {error}</p>
               </div>
             )}
 

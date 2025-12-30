@@ -4,6 +4,20 @@
   padding: 2rem;
   text-align: center;
   border-top: 3px solid #667eea;
+  position: relative;
+  margin-top: -80px;
+  padding-top: 6rem;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(26, 188, 156, 0.3), rgba(22, 160, 133, 0.3), transparent);
+  pointer-events: none;
 }
 
 .footer-content {
