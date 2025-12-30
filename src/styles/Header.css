@@ -1,9 +1,10 @@
 .header {
   background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 3px solid #667eea;
 }
 
 .header-container {
@@ -20,6 +21,7 @@
   font-size: 1.8rem;
   margin: 0;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .nav {
@@ -34,10 +36,10 @@
   font-size: 1rem;
   color: #333;
   cursor: pointer;
-  transition: color 0.3s ease;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  font-weight: 600;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .nav-link:hover {

@@ -8,19 +8,49 @@ const QuotesSection = () => {
   const [error, setError] = useState(null);
   const [quoteCount, setQuoteCount] = useState(0);
 
+  // Fallback quotes if API fails
+  const fallbackQuotes = [
+    { text: "The only way out is through.", author: "Robert Frost" },
+    { text: "Hope is the thing with feathers that perches in the soul.", author: "Emily Dickinson" },
+    { text: "Strength doesn't come from what you can do. It comes from overcoming things you once thought you couldn't.", author: "Rikki Rogers" },
+    { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" },
+    { text: "Every new day is another chance to fight. Another chance to succeed.", author: "Unknown" },
+    { text: "The human spirit is stronger than anything that can happen to it.", author: "C.C. Scott" },
+    { text: "Healing doesn't mean the damage never existed. It means the damage no longer controls our lives.", author: "Thema Bryant-Davis" },
+    { text: "You don't have to be perfect to be worthy of love and support.", author: "Unknown" },
+    { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" },
+    { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", author: "Ralph Waldo Emerson" }
+  ];
+
   const fetchQuote = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('https://api.quotable.io/random?tags=inspirational,motivational');
-      setQuote({
-        text: response.data.content,
-        author: response.data.author.replace(', type.author', ''),
+      // Try primary API first
+      const response = await axios.get('https://api.quotable.io/random', {
+        timeout: 5000,
+        headers: { 'Accept': 'application/json' }
       });
+      
+      // Handle the response properly
+      const quoteText = response.data.content || response.data.text || '';
+      const authorName = response.data.author || 'Unknown';
+      
+      if (quoteText) {
+        setQuote({
+          text: quoteText,
+          author: authorName.split(',')[0] // Remove extra info
+        });
+      } else {
+        throw new Error('Invalid response format');
+      }
       setQuoteCount((prev) => prev + 1);
     } catch (err) {
-      setError('Failed to load quote. Please try again.');
-      console.error('Error fetching quote:', err);
+      // Use fallback quote
+      console.log('Primary API failed, using fallback quote');
+      const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
+      setQuote(fallbackQuotes[randomIndex]);
+      setQuoteCount((prev) => prev + 1);
     } finally {
       setLoading(false);
     }
