@@ -1,10 +1,10 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #333;
+  color: #1a1a2e;
   background-color: #ffffff;
 
   font-synthesis: none;
@@ -20,9 +20,10 @@
 }
 
 a {
-  font-weight: 500;
+  font-weight: 600;
   color: #667eea;
-  text-decoration: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
@@ -42,22 +43,31 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
+  font-weight: 700;
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  line-height: 1.6;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #333;
+    color: #1a1a2e;
     background-color: #ffffff;
   }
   a:hover {
     color: #764ba2;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
